@@ -1,4 +1,4 @@
-﻿namespace FantasyFighter
+﻿namespace AdventureFantasy
 {
     public abstract class Character
     {

@@ -24,7 +24,7 @@
 
         public void StartNewGame()
         {
-            if (this.IsGameRunning)
+            if (IsGameRunning)
             {
                 Console.WriteLine("The game is already running");
                 return;
@@ -32,31 +32,19 @@
 
             this.IsGameRunning = true;
 
-            // messaggio di benvenuto al giocatore
+            // TODO: messaggio di benvenuto al giocatore
             this.DisplayWelcomeMessage();
 
-            // chiedere al giocatore di scegliere un nome
-            this.GetPlayerName();
+            // TODO: chiedere al giocatore di scegliere un nome
 
-            // chiedere al giocatore di scegliere un ruolo
+            // TODO: chiedere al giocatore di scegliere un ruolo
 
-            // costruire il nostro hero
+            // TODO: costruire il nostro hero
 
-            // iniziano i turni
-        }
+            // TODO: iniziano i turni
 
-        private string GetPlayerName()
-        {
-            Console.WriteLine("Please choose your name");
-            var name = Console.ReadLine();
-
-            if (string.IsNullOrWhiteSpace(name))
-                Console.WriteLine("The name cannot be empty or white spaces");
-
-            //TODO: richiedere il nome al giocatore
-
-            return name!;
-        }
+            // TODO: stop game
+        }  
 
         private void DisplayWelcomeMessage()
         {

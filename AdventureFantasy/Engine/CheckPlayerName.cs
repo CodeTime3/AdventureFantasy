@@ -26,14 +26,14 @@
                 ".",
                 ",",
                 ";",
-                ":"
+                ":",
             };
 
             foreach (string prohibitedWord in prohibitedWords)
             {
                 if (name.Contains(prohibitedWord))
                 {
-                    return new CheckPlayerName(false, $"The name cannot include {prohibitedWord}");
+                    return new CheckPlayerName(false, $"The name cannot include ({prohibitedWord}), enter a valid name");
                 }
             }
 
@@ -43,16 +43,20 @@
         public string GetPlayerName()
         {
             Console.WriteLine("Please choose your name");
-            var name = Console.ReadLine();
+            var name = "";
+            CheckPlayerName playerNameCheck = null;
 
-            var playerNameCheck = IsPlayerNameValid(name);
-
-            if (!playerNameCheck.IsValid)
+            do
             {
-                Console.WriteLine(playerNameCheck.ErrorMessage);
-            }
+                name = Console.ReadLine();
 
-            //TODO: richiedere il nome al giocatore
+                playerNameCheck = IsPlayerNameValid(name);
+
+                if (!playerNameCheck.IsValid)
+                {
+                    Console.WriteLine(playerNameCheck.ErrorMessage);
+                }
+            } while (!playerNameCheck.IsValid);
 
             return name!;
         }

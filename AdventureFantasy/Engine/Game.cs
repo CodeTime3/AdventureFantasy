@@ -30,10 +30,10 @@
                 return;
             }
 
-            this.IsGameRunning = true;
+            IsGameRunning = true;
 
             // TODO: messaggio di benvenuto al giocatore
-            this.DisplayWelcomeMessage();
+            DisplayWelcomeMessage();
 
             // TODO: chiedere al giocatore di scegliere un nome
 
@@ -48,7 +48,7 @@
 
         private void DisplayWelcomeMessage()
         {
-            Console.WriteLine("Messaggio di benvuto....");
+            Console.WriteLine("Welcome to the land of Yorwyn");
         }
     }
 }

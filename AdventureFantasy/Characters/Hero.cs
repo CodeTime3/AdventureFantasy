@@ -19,12 +19,4 @@
             throw new NotImplementedException();
         }
     }
-
-    public enum Roles
-    {
-        Warrior,
-        Cleric,
-        Rogue,
-        Mage
-    }
 }

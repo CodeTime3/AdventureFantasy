@@ -34,9 +34,9 @@
 
             DisplayWelcomeMessage();
 
-            // TODO: chiedere al giocatore di scegliere un nome
             CheckPlayerName checkPlayerName = new CheckPlayerName();
             checkPlayerName.GetPlayerName();
+
             // TODO: chiedere al giocatore di scegliere un ruolo
 
             // TODO: costruire il nostro hero

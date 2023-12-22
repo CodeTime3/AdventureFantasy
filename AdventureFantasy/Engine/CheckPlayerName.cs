@@ -18,10 +18,10 @@
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                return new CheckPlayerName(false, "The name cannot be empty or white spaces");
+                return new CheckPlayerName(false, "The name cannot be empty or with white spaces");
             }
 
-            string[] prohibitedWords = new string[]
+            string[] forbiddenWords = new string[]
             {
                 ".",
                 ",",
@@ -29,20 +29,20 @@
                 ":",
             };
 
-            foreach (string prohibitedWord in prohibitedWords)
+            foreach (string forbiddenWord in forbiddenWords)
             {
-                if (name.Contains(prohibitedWord))
+                if (name.Contains(forbiddenWord))
                 {
-                    return new CheckPlayerName(false, $"The name cannot include ({prohibitedWord}), enter a valid name");
+                    return new CheckPlayerName(false, $"The name cannot include ({forbiddenWord}), enter a valid name");
                 }
             }
 
-            return new CheckPlayerName(true, "Name is ok");
+            return new CheckPlayerName(true, "Name is valid");
         }
 
         public string GetPlayerName()
         {
-            Console.WriteLine("Please choose your name");
+            Console.WriteLine("Choose your name, please");
             var name = "";
             CheckPlayerName playerNameCheck = null;
 

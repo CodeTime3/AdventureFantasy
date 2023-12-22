@@ -13,9 +13,9 @@
             ErrorMessage = errorMessage;
         }
 
-        private CheckPlayerName IsRolePlayerValid(string NameRole)
+        private CheckPlayerName IsRolePlayerValid(string RoleName)
         {
-            if (string.IsNullOrWhiteSpace(NameRole))
+            if (string.IsNullOrWhiteSpace(RoleName))
             {
                 return new CheckPlayerName(false, "Enter a valid role");
             }
@@ -30,41 +30,41 @@
 
             foreach (var HeroRole in HeroRoles)
             {
-                if(NameRole.Equals(HeroRole))
+                if(RoleName.Equals(HeroRole))
                 {
                     return new CheckPlayerName(true, "The role is ok");
                 }
             }
 
-            return new CheckPlayerName(false, $"The role ({NameRole}) doesn't exist, enter a valid role");
+            return new CheckPlayerName(false, $"The role ({RoleName}) doesn't exist, enter a valid role");
         }
 
         public Roles GetPlayerRole()
         {
             Console.WriteLine("Please choose a role");
             Console.WriteLine("Warrior, Cleric, Rouge, Mage. Enter the name of the role");
-            var NameRole = "";
-            CheckPlayerName playerNameCheck = null;
+            var RoleName = "";
+            CheckPlayerName CheckPlayerName = null;
 
             do
             {
-                NameRole = Console.ReadLine().ToLower();
+                RoleName = Console.ReadLine().ToLower();
 
-                playerNameCheck = IsRolePlayerValid(NameRole);
+                CheckPlayerName = IsRolePlayerValid(RoleName);
 
-                if (!playerNameCheck.IsValid)
+                if (!CheckPlayerName.IsValid)
                 {
-                    Console.WriteLine(playerNameCheck.ErrorMessage);
+                    Console.WriteLine(CheckPlayerName.ErrorMessage);
                 }
-            } while (!playerNameCheck.IsValid);
+            } while (!CheckPlayerName.IsValid);
 
-            if (NameRole.Equals("cleric")) 
+            if (RoleName.Equals("cleric")) 
             {
                 return Roles.Cleric;
-            }else if (NameRole.Equals("rouge"))
+            }else if (RoleName.Equals("rouge"))
             {
                 return Roles.Rogue;
-            }else if (NameRole.Equals("mage"))
+            }else if (RoleName.Equals("mage"))
             {
                 return Roles.Mage;
             }

@@ -35,11 +35,12 @@
             DisplayWelcomeMessage();
 
             CheckPlayerName checkPlayerName = new CheckPlayerName();
-            checkPlayerName.GetPlayerName();
+            var name = checkPlayerName.GetPlayerName();
 
-            // TODO: chiedere al giocatore di scegliere un ruolo
+            ChooseHeroRole chooseHeroRole = new ChooseHeroRole();
+            Roles roles = chooseHeroRole.GetPlayerRole();
 
-            // TODO: costruire il nostro hero
+            Hero hero = new Hero(name, roles);
 
             // TODO: iniziano i turni
 

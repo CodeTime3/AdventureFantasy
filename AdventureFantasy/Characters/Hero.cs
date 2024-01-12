@@ -1,4 +1,4 @@
-﻿namespace AdventureFantasy
+namespace AdventureFantasy
 {
     public class Hero : Character, ICanDefend, ICanAttack
     {
@@ -17,6 +17,15 @@
         public void Attack()
         {
             throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return $"Name: {Name}" + 
+                $" | Role: {Role}" +
+                $" | Health: {Health}" +
+                $" | Attack points: {AttackPoints}"+
+                $" | Defense points: {DefensePoints}";
         }
     }
 }

@@ -1,60 +1,64 @@
-﻿namespace AdventureFantasy
+﻿using AdventureFantasy.Abstractions;
+using AdventureFantasy.Engine;
+
+namespace AdventureFantasy
 {
     public class CheckPlayerName
     {
-        public bool IsValid { get; }
 
-        public string ErrorMessage { get; }
+        private readonly IConsole _console;
+        
+        private Result Result;
 
         public CheckPlayerName() { }
 
-        public CheckPlayerName(bool isValid, string errorMessage)
-        {
-            IsValid = isValid;
-            ErrorMessage = errorMessage;
+        public CheckPlayerName(IConsole console) 
+        { 
+            _console = console;
         }
 
-        private CheckPlayerName IsPlayerNameValid(string name)
+        private Result IsPlayerNameValid(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                return new CheckPlayerName(false, "The name cannot be empty or with white spaces");
+                return new Result(false, "The name cannot be empty or with white spaces");
             }
 
-            string[] forbiddenWords = new string[]
+            char[] forbiddenWords = 
             {
-                ".",
-                ",",
-                ";",
-                ":",
+                '.',
+                ',',
+                ';',
+                ':'
             };
 
-            foreach (string forbiddenWord in forbiddenWords)
+            foreach (char forbiddenWord in forbiddenWords)
             {
                 if (name.Contains(forbiddenWord))
                 {
-                    return new CheckPlayerName(false, $"The name cannot include ({forbiddenWord}), enter a valid name");
+                    return new Result(false, $"The name cannot include ({forbiddenWord}), enter a valid name");
                 }
             }
 
-            return new CheckPlayerName(true, "Name is valid");
+            return new Result(true, "Name is valid");
         }
 
         public string GetPlayerName()
         {
-            Console.WriteLine("Choose your name, please");
-            var name = "";
-            CheckPlayerName playerNameCheck = null;
+            _console.WriteLine("Choose your name, please");
+            Result playerNameCheck;
+            string? name;
 
             do
             {
-                name = Console.ReadLine();
+                name = _console.ReadLine();
+                //isVal = !string.IsNullOrWhiteSpace(name) && name?.Contains(new char[] { ',' });
 
                 playerNameCheck = IsPlayerNameValid(name);
 
                 if (!playerNameCheck.IsValid)
                 {
-                    Console.WriteLine(playerNameCheck.ErrorMessage);
+                    _console.WriteLine(playerNameCheck.ErrorMessage);
                 }
             } while (!playerNameCheck.IsValid);
 

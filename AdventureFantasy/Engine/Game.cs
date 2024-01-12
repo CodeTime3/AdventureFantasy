@@ -1,14 +1,17 @@
-﻿namespace AdventureFantasy
+﻿using AdventureFantasy.Abstractions;
+
+namespace AdventureFantasy
 {
     public class Game
     {
         private List<Character> _enemies;
+        private IConsole _console;
 
         private Hero? _player;
 
         public bool IsGameRunning { get; private set; }
 
-        public Game()
+        public Game(IConsole console)
         {
             this._enemies = new List<Character>()
             {
@@ -20,13 +23,15 @@
                 new Slime("Slime #1"),
                 new Slime("Slime #2")
             };
+
+            _console = console;
         }
 
         public void StartNewGame()
         {
             if (IsGameRunning)
             {
-                Console.WriteLine("The game is already running");
+                _console.WriteLine("The game is already running");
                 return;
             }
 
@@ -34,13 +39,15 @@
 
             DisplayWelcomeMessage();
 
-            CheckPlayerName checkPlayerName = new CheckPlayerName();
+            CheckPlayerName checkPlayerName = new CheckPlayerName(_console);
             var name = checkPlayerName.GetPlayerName();
 
             ChooseHeroRole chooseHeroRole = new ChooseHeroRole();
             Roles roles = chooseHeroRole.GetPlayerRole();
 
             Hero hero = new Hero(name, roles);
+
+            _console.WriteLine(hero.ToString());
 
             // TODO: iniziano i turni
 

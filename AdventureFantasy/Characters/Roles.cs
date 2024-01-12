@@ -1,4 +1,4 @@
-﻿namespace AdventureFantasy
+namespace AdventureFantasy
 {
     public enum Roles
     {

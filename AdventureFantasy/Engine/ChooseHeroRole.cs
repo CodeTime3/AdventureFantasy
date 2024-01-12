@@ -1,75 +1,68 @@
-﻿namespace AdventureFantasy
+﻿using AdventureFantasy.Abstractions;
+using AdventureFantasy.Engine;
+using System.Data;
+
+namespace AdventureFantasy
 {
     public class ChooseHeroRole
     {
-        public bool IsValid { get; }
-        public string ErrorMessage { get; }
+        private readonly IConsole _console;
 
-        public ChooseHeroRole() { } 
+        private Result Result;
 
-        public ChooseHeroRole(bool isValid, string errorMessage)
+        private string[] HeroRoles =
         {
-            IsValid = isValid; 
-            ErrorMessage = errorMessage;
-        }
-
-        private CheckPlayerName IsRolePlayerValid(string RoleName)
-        {
-            if (string.IsNullOrWhiteSpace(RoleName))
-            {
-                return new CheckPlayerName(false, "Enter a valid role");
-            }
-
-            string[] HeroRoles = 
-            {
                 "warrior",
                 "cleric",
                 "rouge",
                 "mage"
-            };
+        };
+
+        public ChooseHeroRole() { }
+
+        public ChooseHeroRole(IConsole _console)
+        {
+            _console = _console;
+        }
+
+        private Result IsRolePlayerValid(string RoleName)
+        {
+            if (string.IsNullOrWhiteSpace(RoleName))
+            {
+                return new Result(false, "Enter a valid role");
+            }
 
             foreach (var HeroRole in HeroRoles)
             {
-                if(RoleName.Equals(HeroRole))
+                if (RoleName.Equals(HeroRole))
                 {
-                    return new CheckPlayerName(true, "The role is ok");
+                    return new Result(true, "The role is ok");
                 }
             }
 
-            return new CheckPlayerName(false, $"The role ({RoleName}) doesn't exist, enter a valid role");
+            return new Result(false, $"The role ({RoleName}) doesn't exist, enter a valid role");
         }
 
         public Roles GetPlayerRole()
         {
-            Console.WriteLine("Please choose a role");
-            Console.WriteLine("Warrior, Cleric, Rouge, Mage. Enter the name of the role");
+            _console.WriteLine("Please choose a role");
+            _console.WriteLine("Warrior, Cleric, Rouge, Mage. Enter the name of the role");
             var RoleName = "";
-            CheckPlayerName CheckPlayerName = null;
+            Result ChooseHeroRole = null;
 
             do
             {
-                RoleName = Console.ReadLine().ToLower();
+                RoleName = _console.ReadLine().ToLower();
 
-                CheckPlayerName = IsRolePlayerValid(RoleName);
+                ChooseHeroRole = IsRolePlayerValid(RoleName);
 
-                if (!CheckPlayerName.IsValid)
+                if (!ChooseHeroRole.IsValid)
                 {
-                    Console.WriteLine(CheckPlayerName.ErrorMessage);
+                    _console.WriteLine(ChooseHeroRole.ErrorMessage);
                 }
-            } while (!CheckPlayerName.IsValid);
+            } while (!ChooseHeroRole.IsValid);
 
-            if (RoleName.Equals("cleric")) 
-            {
-                return Roles.Cleric;
-            }else if (RoleName.Equals("rouge"))
-            {
-                return Roles.Rogue;
-            }else if (RoleName.Equals("mage"))
-            {
-                return Roles.Mage;
-            }
-
-            return Roles.Warrior;
+            return Enum.Parse<Roles>(RoleName, true);
         }
     }
 }

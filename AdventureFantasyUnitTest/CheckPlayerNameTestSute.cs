@@ -14,7 +14,7 @@ namespace AdventureFantasyUnitTest
             console.ReadLineReturn = "hello";
             var result = checkPlayerName.GetPlayerName();
             
-            Assert.Equal("", result);
+            Assert.Equal("hello", result);
         }
     }
 }

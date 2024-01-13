@@ -5,10 +5,10 @@
         public bool IsValid { get; }
         public string ErrorMessage { get; }
 
-        public Result(bool IsValid, string ErrorMessage) 
+        public Result(bool isValid, string errorMessage) 
         {
-            IsValid = IsValid;
-            ErrorMessage = ErrorMessage;
+            IsValid = isValid;
+            ErrorMessage = errorMessage;
         }
     }
 }

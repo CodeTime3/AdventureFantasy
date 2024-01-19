@@ -8,8 +8,6 @@ namespace AdventureFantasy
     {
         private readonly IConsole _console;
 
-        private Result Result;
-
         private string[] HeroRoles =
         {
                 "warrior",
@@ -20,9 +18,9 @@ namespace AdventureFantasy
 
         public ChooseHeroRole() { }
 
-        public ChooseHeroRole(IConsole _console)
+        public ChooseHeroRole(IConsole console)
         {
-            _console = _console;
+            _console = console;
         }
 
         private Result IsRolePlayerValid(string RoleName)

@@ -7,8 +7,6 @@ namespace AdventureFantasy
     {
 
         private readonly IConsole _console;
-        
-        private Result Result;
 
         public CheckPlayerName() { }
 

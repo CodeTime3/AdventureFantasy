@@ -1,4 +1,4 @@
-﻿using AdventureFantasy;
+﻿using AdventureFantasy.Engine.HeroEngine;
 using AdventureFantasyUnitTest.Mocks;
 using Xunit;
 
@@ -6,6 +6,7 @@ namespace AdventureFantasyUnitTest
 {
     public class CheckPlayerNameTestSute
     {
+        //TODO: fare gli unit test 
         [Fact]
         public void GetPlayerNameTest()
         {

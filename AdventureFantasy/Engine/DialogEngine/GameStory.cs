@@ -35,8 +35,6 @@ namespace AdventureFantasy.Engine.DialogEngine
                 $"task of retrieving\nthe {_amulet.Name} amulet! He granted the request, and began to walk the long path...");
         }
 
-        //Dopo tutti gli scontri e le avversità heroname è riuscito a recuperare the amuletname, 
-        //subito dopo aver fatto ritorno nella sua terra è stato acclamato da tutto il popolo
         public void EndOfNarration(Hero hero)
         {
             _console.WriteLine($"After all these fights and hardships thereof, {hero.Name} managed to recover\n " +

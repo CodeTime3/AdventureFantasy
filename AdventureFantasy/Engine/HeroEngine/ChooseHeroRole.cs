@@ -1,10 +1,11 @@
 ﻿using AdventureFantasy.Abstractions;
 using AdventureFantasy.Engine;
+using AdventureFantasy.Interfaces.HeroInterfaces;
 using System.Data;
 
-namespace AdventureFantasy
+namespace AdventureFantasy.Engine.HeroEngine
 {
-    public class ChooseHeroRole
+    public class ChooseHeroRole : IPlayerRoleProvider
     {
         private readonly IConsole _console;
 
@@ -15,8 +16,6 @@ namespace AdventureFantasy
                 "rouge",
                 "mage"
         };
-
-        public ChooseHeroRole() { }
 
         public ChooseHeroRole(IConsole console)
         {
@@ -43,20 +42,20 @@ namespace AdventureFantasy
 
         public Roles GetPlayerRole()
         {
-            _console.WriteLine("Please choose a role");
-            _console.WriteLine("Warrior, Cleric, Rouge, Mage. Enter the name of the role");
-            var RoleName = "";
-            Result ChooseHeroRole = null;
+            _console?.WriteLine("What's your favorite role?");
+            _console?.WriteLine("Warrior, Cleric, Rouge, Mage. Enter the name of the role");
+            string? RoleName;
+            Result? ChooseHeroRole;
 
             do
             {
-                RoleName = _console.ReadLine().ToLower();
+                RoleName = _console?.ReadLine().ToLower();
 
                 ChooseHeroRole = IsRolePlayerValid(RoleName);
 
                 if (!ChooseHeroRole.IsValid)
                 {
-                    _console.WriteLine(ChooseHeroRole.ErrorMessage);
+                    _console?.WriteLine(ChooseHeroRole.ErrorMessage);
                 }
             } while (!ChooseHeroRole.IsValid);
 

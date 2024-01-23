@@ -1,17 +1,15 @@
 ﻿using AdventureFantasy.Abstractions;
 using AdventureFantasy.Engine;
+using AdventureFantasy.Interfaces.HeroInterfaces;
 
-namespace AdventureFantasy
+namespace AdventureFantasy.Engine.HeroEngine
 {
-    public class CheckPlayerName
+    public class CheckPlayerName : IPlayerNameProvider
     {
-
         private readonly IConsole _console;
 
-        public CheckPlayerName() { }
-
-        public CheckPlayerName(IConsole console) 
-        { 
+        public CheckPlayerName(IConsole console)
+        {
             _console = console;
         }
 
@@ -22,7 +20,7 @@ namespace AdventureFantasy
                 return new Result(false, "The name cannot be empty or with white spaces");
             }
 
-            char[] forbiddenWords = 
+            char[] forbiddenWords =
             {
                 '.',
                 ',',
@@ -43,20 +41,19 @@ namespace AdventureFantasy
 
         public string GetPlayerName()
         {
-            _console.WriteLine("Choose your name, please");
+            _console?.WriteLine("What's your name?");
             Result playerNameCheck;
             string? name;
 
             do
             {
-                name = _console.ReadLine();
-                //isVal = !string.IsNullOrWhiteSpace(name) && name?.Contains(new char[] { ',' });
+                name = _console?.ReadLine();
 
                 playerNameCheck = IsPlayerNameValid(name);
 
                 if (!playerNameCheck.IsValid)
                 {
-                    _console.WriteLine(playerNameCheck.ErrorMessage);
+                    _console?.WriteLine(playerNameCheck.ErrorMessage);
                 }
             } while (!playerNameCheck.IsValid);
 

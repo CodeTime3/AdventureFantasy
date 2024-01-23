@@ -45,7 +45,7 @@ namespace AdventureFantasy
             dialogEngine.StartAdventure();
  
             //TODO: pensare ad un modo per salvare i progressi (usare i file)
-            // TODO: stop game
+            //TODO: stop game
         }
     }
 }

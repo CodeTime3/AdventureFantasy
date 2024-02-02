@@ -6,7 +6,7 @@ namespace AdventureFantasy
     public class Troll : Character, ICanDefend, ICanAttack
     {
         private readonly IConsole _console;
-        public Troll(string name, IConsole console) : base(name, health: 50, attackPoints: 8, defensePoints: 10)
+        public Troll(string name, IConsole console) : base(name, health: 50, attackPoints: 15, defensePoints: 20)
         {
             _console = console;
         }

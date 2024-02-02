@@ -8,7 +8,7 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
     {
         private readonly IConsole _console;
 
-        private List<Slime> _slimeList;
+        private List<Slime> _slimeList = new List<Slime>();
 
         public AdventureTowardTheRatking(IConsole console)
         {
@@ -27,7 +27,7 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
         {
             _console.WriteLine($"Along the way {hero.Name} meets three slimes.");
 
-            Dragon ratKing = new Dragon("RatKing", _console);
+            RatKing ratKing = new RatKing("RatKing", _console);
 
             _console.WriteLine("Do you wanna fight or run away?");
             _console.WriteLine("Type \"fight\" if you wanna fight against slimes, otherwise type run");
@@ -51,7 +51,7 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
                 {
                     _console.WriteLine("Type \"fight\" or \"run\"");
                 }
-            } while ((choice.Equals("fight")) || (choice.Equals("run")));
+            } while (!((choice.Equals("fight")) || (choice.Equals("run"))));
 
             _console.WriteLine($"Along the way {hero.Name} meets the {ratKing.Name}");
             ratKing.StartDialog();
@@ -73,13 +73,13 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
             }
         }
 
-        private void FightAgainstBoss(Hero hero, Dragon ratking)
+        private void FightAgainstBoss(Hero hero, RatKing ratking)
         {
             do
             {
                 hero.Attack(ratking);
                 ratking.Attack(hero);
-            } while ((ratking.Health > 0) || (hero.Health > 0));
+            } while (!((ratking.Health <= 0) || (hero.Health <= 0)));
 
             if (hero.Health > 0)
             {

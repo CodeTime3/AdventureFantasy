@@ -7,7 +7,7 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
     {
         private readonly IConsole _console;
 
-        private List<Slime> _slimeList;
+        private List<Slime> _slimeList = new List<Slime>();
 
         public AdventureTowardTheTroll(IConsole console)
         {
@@ -26,7 +26,7 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
         {
             _console.WriteLine($"Along the way {hero.Name} meets three slimes.");
 
-            Dragon troll = new Dragon("Troll", _console);
+            Troll troll = new Troll("Troll", _console);
 
             _console.WriteLine("Do you wanna fight or run away?");
             _console.WriteLine("Type \"fight\" if you wanna fight against slimes, otherwise type run");
@@ -50,7 +50,7 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
                 {
                     _console.WriteLine("Type \"fight\" or \"run\"");
                 }
-            } while ((choice.Equals("fight")) || (choice.Equals("run")));
+            } while (!((choice.Equals("fight")) || (choice.Equals("run"))));
 
             _console.WriteLine($"Along the way {hero.Name} meets the {troll.Name}");
             troll.StartDialog();
@@ -72,13 +72,13 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
             }
         }
 
-        private void FightAgainstBoss(Hero hero, Dragon troll)
+        private void FightAgainstBoss(Hero hero, Troll troll)
         {
             do
             {
                 hero.Attack(troll);
                 troll.Attack(hero);
-            } while ((troll.Health > 0) || (hero.Health > 0));
+            } while (!((troll.Health <= 0) || (hero.Health <= 0)));
 
             if (hero.Health > 0)
             {

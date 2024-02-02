@@ -6,7 +6,7 @@ namespace AdventureFantasy
     public class Goblin : Character, ICanAttack, ICanDefend
     {
         private readonly IConsole _console;
-        public Goblin(string name, IConsole console) : base(name, health: 30, attackPoints: 3, defensePoints: 2)
+        public Goblin(string name, IConsole console) : base(name, health: 30, attackPoints: 10, defensePoints: 5)
         {
             _console = console;
         }

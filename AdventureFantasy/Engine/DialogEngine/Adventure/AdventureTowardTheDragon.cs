@@ -8,7 +8,7 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
     {
         private readonly IConsole _console;
 
-        private List<Slime> _slimeList;
+        private List<Slime> _slimeList = new List<Slime>();
 
         public AdventureTowardTheDragon(IConsole console)
         {
@@ -52,7 +52,7 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
                 {
                     _console.WriteLine("Type \"fight\" or \"run\"");
                 }
-            } while ((choice.Equals("fight")) || (choice.Equals("run")));
+            } while (!((choice.Equals("fight")) || (choice.Equals("run"))));
 
             _console.WriteLine($"Along the way {hero.Name} meets the {thief.Name}, \n" +
                 $"he was controlling the {dragon.Name} mind");
@@ -81,7 +81,7 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
             {
                 hero.Attack(dragon);
                 dragon.Attack(hero);
-            } while ((dragon.Health > 0) || (hero.Health > 0));
+            } while (!((dragon.Health <= 0) || (hero.Health <= 0)));
 
             if (hero.Health > 0)
             {

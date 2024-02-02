@@ -7,7 +7,7 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
     {
         private readonly IConsole _console;
 
-        private List<Slime> _slimeList;
+        private List<Slime> _slimeList = new List<Slime>();
 
         public AdventureTowardTheGoblin(IConsole console)
         {
@@ -26,7 +26,7 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
         {
             _console.WriteLine($"Along the way {hero.Name} meets three slimes.");
 
-            Dragon goblin = new Dragon("Goblin", _console);
+            Goblin goblin = new Goblin("Goblin", _console);
 
             _console.WriteLine("Do you wanna fight or run away?");
             _console.WriteLine("Type \"fight\" if you wanna fight against slimes, otherwise type run");
@@ -38,7 +38,6 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
 
                 if (choice.Equals("fight"))
                 {
-                    _slimeList = GetSlimeList();
                     FightAgainstSlime(hero);
                     _console.WriteLine($"{hero.Name} defeated slimes");
                 }
@@ -50,7 +49,7 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
                 {
                     _console.WriteLine("Type \"fight\" or \"run\"");
                 }
-            } while ((choice.Equals("fight")) || (choice.Equals("run")));
+            } while (!((choice.Equals("fight")) || (choice.Equals("run"))));
 
             _console.WriteLine($"Along the way {hero.Name} meets the {goblin.Name}");
             goblin.StartDialog();
@@ -59,6 +58,8 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
 
         private void FightAgainstSlime(Hero hero)
         {
+            _slimeList = GetSlimeList();
+
             foreach (var slime in _slimeList)
             {
                 do
@@ -72,13 +73,14 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
             }
         }
 
-        private void FightAgainstBoss(Hero hero, Dragon goblin)
+        private void FightAgainstBoss(Hero hero, Goblin goblin)
         {
             do
             {
                 hero.Attack(goblin);
                 goblin.Attack(hero);
-            } while ((goblin.Health > 0) || (hero.Health > 0));
+
+            } while (!((goblin.Health <= 0) || (hero.Health <= 0)));
 
             if (hero.Health > 0)
             {
@@ -91,6 +93,7 @@ namespace AdventureFantasy.Engine.DialogEngine.Adventure
             else
             {
                 _console.WriteLine($"{goblin.Name} defeated {hero.Name}");
+                return;
             }
         }
     }

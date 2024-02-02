@@ -47,7 +47,7 @@ namespace AdventureFantasy.Engine.HeroEngine
 
             do
             {
-                name = _console?.ReadLine();
+                name = _console?.ReadLine().Trim('_', '-', ' ');
 
                 playerNameCheck = IsPlayerNameValid(name);
 
